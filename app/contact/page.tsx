@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Get in Touch",
   description:
     "Tell us about your family and we'll be in touch personally as the Christchurch pilot takes shape. No payment, no commitment.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 const validInterests = new Set([
   "ongoing-local-support",

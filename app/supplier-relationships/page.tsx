@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { LegalPlaceholderNotice } from "@/components/sections/LegalPlaceholderNotice";
 import { boundaryStatement, site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Supplier Relationships",
   description: `How ${site.name} works with tradespeople and third-party service providers.`,
-  alternates: { canonical: "/supplier-relationships" },
-  robots: { index: false },
-};
+  path: "/supplier-relationships",
+  noIndex: true,
+});
 
 export default function SupplierRelationshipsPage() {
   return (

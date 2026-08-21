@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
@@ -6,13 +5,14 @@ import { Button } from "@/components/ui/Button";
 import { services } from "@/content/services";
 import { serviceSchema } from "@/lib/schema";
 import { boundaryStatement, site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "What We Can Help With",
   description:
     "From organising trusted trades and checking the house, to being there when you can't — what Your Person NZ can help with for families in Christchurch and Canterbury.",
-  alternates: { canonical: "/what-we-can-help-with" },
-};
+  path: "/what-we-can-help-with",
+});
 
 export default function WhatWeCanHelpWithPage() {
   return (

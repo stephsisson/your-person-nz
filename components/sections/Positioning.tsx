@@ -10,7 +10,7 @@ export function Positioning() {
           <SectionHeading
             eyebrow="What this isn't"
             title="Not home care. Not taking over. Just really useful help."
-            description="Mum or Dad may be entirely independent — still driving, travelling, gardening, working, socialising, with zero interest in being &lsquo;looked after.&rsquo; Sometimes they just need another capable person nearby, and sometimes the family overseas needs to know someone in New Zealand can help when they can't."
+            description="Mum or Dad may be entirely independent — still driving, travelling, gardening, working, socialising, with zero interest in being 'looked after.' Sometimes they just need another capable person nearby, and sometimes the family overseas needs to know someone in New Zealand can help when they can't."
           />
         </Reveal>
         <Reveal>

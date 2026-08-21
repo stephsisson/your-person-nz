@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { countryPages } from "@/content/countries";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
 export function generateStaticParams() {
   return countryPages.map((country) => ({ country: country.slug }));
@@ -19,11 +20,11 @@ export async function generateMetadata({
   const country = countryPages.find((c) => c.slug === slug);
   if (!country) return {};
 
-  return {
+  return pageMetadata({
     title: country.metaTitle,
     description: country.metaDescription,
-    alternates: { canonical: `/for-families-overseas/${country.slug}` },
-  };
+    path: `/for-families-overseas/${country.slug}`,
+  });
 }
 
 export default async function CountryPage({

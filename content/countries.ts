@@ -16,7 +16,7 @@ export const countryPages: CountryPage[] = [
   {
     slug: "australia",
     label: "Australia",
-    metaTitle: "Help for Ageing Parents in NZ From Australia | Your Person NZ",
+    metaTitle: "Help for Ageing Parents in NZ From Australia",
     metaDescription:
       "Living in Sydney, Melbourne, Brisbane or elsewhere in Australia with a parent still in Christchurch? Your Person NZ is a local coordination service for Kiwi families across the Tasman.",
     h1: "For Kiwis in Australia with family in Christchurch",
@@ -28,7 +28,7 @@ export const countryPages: CountryPage[] = [
   {
     slug: "uk",
     label: "the UK",
-    metaTitle: "Support for Elderly Parents in NZ From the UK | Your Person NZ",
+    metaTitle: "Support for Elderly Parents in NZ From the UK",
     metaDescription:
       "Based in the UK with a parent living independently in Christchurch? Your Person NZ coordinates practical local support in Canterbury so you don't have to manage it from the other side of the world.",
     h1: "For Kiwis in the UK with family in Christchurch",
@@ -40,7 +40,7 @@ export const countryPages: CountryPage[] = [
   {
     slug: "elsewhere",
     label: "elsewhere overseas",
-    metaTitle: "Help for Parents in Christchurch From Overseas | Your Person NZ",
+    metaTitle: "Help for Parents in Christchurch From Overseas",
     metaDescription:
       "Living overseas — Singapore, the US, Canada or elsewhere — with a parent in Christchurch or Canterbury? Your Person NZ coordinates trusted local support on your behalf.",
     h1: "For Kiwis overseas with family in Christchurch",

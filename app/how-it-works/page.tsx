@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "How It Works",
   description:
     "How Your Person NZ works: tell us about your family, we get to know what matters, and we coordinate trusted local support in Christchurch and Canterbury whenever something needs sorting.",
-  alternates: { canonical: "/how-it-works" },
-};
+  path: "/how-it-works",
+});
 
 export default function HowItWorksPage() {
   return (

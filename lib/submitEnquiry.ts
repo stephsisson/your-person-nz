@@ -26,8 +26,12 @@ export const enquirySchema = z.object({
   // Which CTA/section on the site triggered this submission, e.g.
   // "founding-pilot", "travel-companion", "contact-page", "guide:<slug>".
   source: z.string().min(1),
-  // Honeypot field — real users never fill this in; bots often do.
-  companyWebsite: z.string().max(0).optional().or(z.literal("")),
+  // Honeypot field — real users never fill this in; bots often do. Deliberately
+  // unconstrained here (any string is a *valid* submission) so a filled-in
+  // honeypot doesn't fail validation with a 400 — the API route checks this
+  // value after a successful parse and silently no-ops instead, which is the
+  // whole point of a honeypot (don't tip the bot off).
+  companyWebsite: z.string().optional().default(""),
 });
 
 export type EnquiryInput = z.infer<typeof enquirySchema>;

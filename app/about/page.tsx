@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { FounderBio } from "@/components/sections/FounderBio";
 import { Positioning } from "@/components/sections/Positioning";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About",
   description:
     "Your Person NZ is a local coordination service for New Zealanders overseas with a parent or family member living independently in Christchurch and Canterbury. Here's why it exists.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

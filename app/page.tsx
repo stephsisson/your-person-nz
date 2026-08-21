@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { Recognition } from "@/components/sections/Recognition";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
@@ -15,12 +14,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { faqPageSchema } from "@/lib/schema";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: `${site.name} — Your person back home`,
   description: site.entityDescription,
-  alternates: { canonical: "/" },
-};
+  path: "/",
+});
 
 export default function HomePage() {
   return (

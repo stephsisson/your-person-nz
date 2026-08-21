@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { guides } from "@/content/guides";
 import { articleSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/pageMetadata";
 
 export function generateStaticParams() {
   return guides.map((guide) => ({ slug: guide.slug }));
@@ -20,11 +21,11 @@ export async function generateMetadata({
   const guide = guides.find((g) => g.slug === slug);
   if (!guide) return {};
 
-  return {
+  return pageMetadata({
     title: guide.title,
     description: guide.metaDescription,
-    alternates: { canonical: `/guides/${guide.slug}` },
-  };
+    path: `/guides/${guide.slug}`,
+  });
 }
 
 export default async function GuidePage({

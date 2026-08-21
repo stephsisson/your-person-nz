@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { LegalPlaceholderNotice } from "@/components/sections/LegalPlaceholderNotice";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Terms of Service",
   description: `The terms governing use of the ${site.name} website and enquiry process during the pilot.`,
-  alternates: { canonical: "/terms" },
-  robots: { index: false },
-};
+  path: "/terms",
+  noIndex: true,
+});
 
 export default function TermsPage() {
   return (

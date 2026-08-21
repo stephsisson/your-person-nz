@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { LegalPlaceholderNotice } from "@/components/sections/LegalPlaceholderNotice";
 import { site } from "@/content/site";
 import { faqItems } from "@/content/faq";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Service Boundaries",
   description: `What ${site.name} does and does not do — a clear statement of scope.`,
-  alternates: { canonical: "/service-boundaries" },
-  robots: { index: false },
-};
+  path: "/service-boundaries",
+  noIndex: true,
+});
 
 export default function ServiceBoundariesPage() {
   const boundaryFaqs = faqItems.filter((item) =>

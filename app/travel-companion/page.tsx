@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Travel Companion Support",
   description:
     "Your Person NZ is exploring door-to-door travel companion support for independent older travellers in New Zealand visiting family overseas. Register your interest.",
-  alternates: { canonical: "/travel-companion" },
-};
+  path: "/travel-companion",
+});
 
 export default function TravelCompanionPage() {
   return (

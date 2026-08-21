@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { guides } from "@/content/guides";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Guides",
   description:
     "Practical guides for New Zealanders living overseas with ageing parents or family in Christchurch and Canterbury — long-distance caregiving, home maintenance, trusted trades and travel.",
-  alternates: { canonical: "/guides" },
-};
+  path: "/guides",
+});
 
 export default function GuidesIndexPage() {
   return (

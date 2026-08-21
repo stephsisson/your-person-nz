@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { countryPages } from "@/content/countries";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/pageMetadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "For Families Overseas",
   description:
     "Your Person NZ is built for Kiwi families managing things across borders and time zones, with a parent in Christchurch or Canterbury and family living in Australia, the UK, or elsewhere overseas.",
-  alternates: { canonical: "/for-families-overseas" },
-};
+  path: "/for-families-overseas",
+});
 
 export default function ForFamiliesOverseasPage() {
   return (
