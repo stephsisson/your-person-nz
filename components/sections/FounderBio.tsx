@@ -39,23 +39,21 @@ export function FounderBio({ condensed = false }: { condensed?: boolean }) {
             )}
 
             <div className="space-y-4 max-w-2xl">
-              {founder.bioParagraphs.map((paragraph, i) => (
-                <p key={i} className="text-lg text-ink-soft">
-                  {paragraph}
-                </p>
-              ))}
-              {/* PLACEHOLDER — expand with founder's full bio + photo. Replace the
-                  content in content/founder.ts — do not draft further biographical
-                  claims here. */}
-              {!condensed ? (
-                <p className="text-sm text-ink-soft/70 italic">
-                  This section is intentionally short for now — full founder story coming soon.
-                </p>
-              ) : (
-                <Link href="/about" className="inline-block text-teal hover:text-teal-dark text-sm font-medium">
-                  Read more about Your Person NZ →
-                </Link>
+              <p className="font-medium text-ink">
+                {founder.name} <span className="text-ink-soft font-normal">— {founder.role}</span>
+              </p>
+              {(condensed ? founder.bioParagraphs.slice(0, 3) : founder.bioParagraphs).map(
+                (paragraph, i) => (
+                  <p key={i} className="text-lg text-ink-soft">
+                    {paragraph}
+                  </p>
+                )
               )}
+              {condensed ? (
+                <Link href="/about" className="inline-block text-teal hover:text-teal-dark text-sm font-medium">
+                  Read the rest of the story →
+                </Link>
+              ) : null}
             </div>
           </div>
         </Reveal>

@@ -123,10 +123,8 @@ in the "Top Sources" panel). The "Locations" panel breaks down visits by country
 
 ## Content still placeholder before launch
 
-- **Founder bio & photo** — `content/founder.ts` has only the one confirmed detail (first two
-  jobs, aged 16–17, in a rest home) written in the founder's voice. The rest of the bio paragraph
-  and a professional photo need to come from the founder directly — do not draft further
-  biographical claims. Marked in code and on the `/about` page.
+- **Founder photo** — `content/founder.ts` now has Stephanie's real bio. The photo is still
+  outstanding; see `content/media.ts` (`founderPhoto`).
 - **Photography** — hero and founder images are currently styled placeholder blocks. To add real
   photos, see `content/media.ts`: drop the file into `public/images/` using the filename listed
   (`hero-home.jpg` at 1600×2000px, `founder-photo.jpg` at 800×1000px — both 4:5 portrait, under

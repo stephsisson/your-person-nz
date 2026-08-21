@@ -1,20 +1,15 @@
-// PLACEHOLDER — expand with founder's full bio + photo.
-//
-// Only one confirmed, real detail exists so far: her first two jobs, at 16 and
-// 17, were in a rest home. Everything below is written in her voice, seeded
-// from that fact, and deliberately left short. Do NOT invent further
-// biographical details, credentials, qualifications or history — replace
-// `bioParagraphs` and `photo` with the founder's own material before launch.
+// Founder's own bio, supplied directly — do not edit the wording without
+// checking with her first. Photo is still outstanding; see content/media.ts
+// (founderPhoto) for where to add it once available.
 
 export const founder = {
-  name: "PLACEHOLDER — founder's name",
+  name: "Stephanie Sisson",
   role: "Founder, Your Person NZ",
-  // Photo is configured in content/media.ts (founderPhoto) — that's also
-  // where you flip the `ready` flag once a real photo file is in place.
   bioParagraphs: [
-    "My first proper job was in a rest home. I was sixteen, then seventeen — folding laundry, making beds, learning the small things that mattered to people who couldn't manage them alone anymore.",
-    // PLACEHOLDER — expand with founder's full bio + photo. The rest of this
-    // paragraph, plus any further paragraphs, should come directly from the
-    // founder rather than being drafted on her behalf.
+    "My first two jobs, at sixteen and seventeen, were at a rest home.",
+    "I was young, not remotely qualified for most of what the job actually taught me, and I discovered something I've never really shaken off: I like older people. They were funny, opinionated, stubborn, occasionally infuriating — and very definitely still themselves.",
+    "Since then I've spent my career solving complicated operational problems and getting things done — the kind of work where you walk into a mess and find a way through it, fast. Your Person NZ brings those two things together.",
+    "I don't think getting older should turn anyone into a \"care recipient.\" Most people just want to keep running their own lives — sometimes with a bit of trusted, practical help on the ground. And for sons and daughters living overseas, what you often need most isn't a service. It's a capable person back home who can sort things out.",
+    "That's what Your Person NZ is here to be.",
   ],
 };
