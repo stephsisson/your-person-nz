@@ -127,9 +127,12 @@ in the "Top Sources" panel). The "Locations" panel breaks down visits by country
   jobs, aged 16–17, in a rest home) written in the founder's voice. The rest of the bio paragraph
   and a professional photo need to come from the founder directly — do not draft further
   biographical claims. Marked in code and on the `/about` page.
-- **Photography** — hero and about-page images are currently styled placeholder blocks, not real
-  photos. See the visual direction brief in the original build spec: warm, editorial, real
-  photography — no stock elderly-couple-on-a-beach imagery, no clinical/medical imagery.
+- **Photography** — hero and founder images are currently styled placeholder blocks. To add real
+  photos, see `content/media.ts`: drop the file into `public/images/` using the filename listed
+  (`hero-home.jpg` at 1600×2000px, `founder-photo.jpg` at 800×1000px — both 4:5 portrait, under
+  ~300–400KB, `.jpg` or `.webp`), then flip that entry's `ready` flag to `true`. No other code
+  changes needed. Visual direction: warm, editorial, real photography — no stock
+  elderly-couple-on-a-beach imagery, no clinical/medical imagery.
 - **Legal pages** (`/privacy`, `/terms`, `/supplier-relationships`, `/service-boundaries`) are
   structural placeholders flagged in-page — **all four need review by a qualified NZ lawyer**
   before onboarding paying customers. They are set to `noindex` until finalised.

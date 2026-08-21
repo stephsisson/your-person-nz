@@ -9,9 +9,8 @@
 export const founder = {
   name: "PLACEHOLDER — founder's name",
   role: "Founder, Your Person NZ",
-  // PLACEHOLDER — expand with founder's full bio + photo.
-  photo: "/images/founder-placeholder.jpg",
-  photoAlt: "PLACEHOLDER — photo of the founder of Your Person NZ",
+  // Photo is configured in content/media.ts (founderPhoto) — that's also
+  // where you flip the `ready` flag once a real photo file is in place.
   bioParagraphs: [
     "My first proper job was in a rest home. I was sixteen, then seventeen — folding laundry, making beds, learning the small things that mattered to people who couldn't manage them alone anymore.",
     // PLACEHOLDER — expand with founder's full bio + photo. The rest of this

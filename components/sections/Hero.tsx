@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/content/site";
+import { media } from "@/content/media";
 
 export function Hero() {
   return (
@@ -29,19 +31,28 @@ export function Hero() {
           </div>
         </div>
 
-        {/* PLACEHOLDER — replace with real, licensed photography per the brief's
-            visual direction (warm, editorial, NOT elderly-couple-on-a-beach stock,
-            no clinical imagery). Subtle NZ-to-overseas distance motif is welcome
-            if it's executed elegantly rather than as a cheesy flight-path map. */}
-        <div
-          role="img"
-          aria-label="PLACEHOLDER — warm editorial photograph representing a New Zealand home and family connection across distance"
-          className="aspect-[4/5] w-full rounded-3xl bg-gradient-to-br from-sand-light via-paper-dim to-teal-light border border-ink/10 flex items-center justify-center"
-        >
-          <span className="text-sm text-ink-soft/70 px-8 text-center">
-            Photography placeholder — see photography brief in README
-          </span>
-        </div>
+        {/* See content/media.ts to swap this placeholder for a real photo:
+            drop the file at public/images/hero-home.jpg and flip `ready` to true. */}
+        {media.heroImage.ready ? (
+          <Image
+            src={media.heroImage.src}
+            alt={media.heroImage.alt}
+            width={1600}
+            height={2000}
+            priority
+            className="aspect-[4/5] w-full rounded-3xl object-cover border border-ink/10"
+          />
+        ) : (
+          <div
+            role="img"
+            aria-label="PLACEHOLDER — warm editorial photograph representing a New Zealand home and family connection across distance"
+            className="aspect-[4/5] w-full rounded-3xl bg-gradient-to-br from-sand-light via-paper-dim to-teal-light border border-ink/10 flex items-center justify-center"
+          >
+            <span className="text-sm text-ink-soft/70 px-8 text-center">
+              Photography placeholder — see content/media.ts
+            </span>
+          </div>
+        )}
       </Container>
     </section>
   );
