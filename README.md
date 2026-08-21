@@ -26,20 +26,53 @@ npm run lint    # ESLint
 
 ## Where to edit key copy
 
-All copy lives in typed content files under `content/`, separate from layout/component code:
+Nearly all customer-facing wording — every heading, paragraph, button label, price, FAQ and
+service description — lives in **one file: `content/siteContent.ts`**. Components reference that
+file rather than having any text written directly into them, and the file itself is organised into
+clearly labelled sections (look for the `// ----` banner comments) matching the order things appear
+on the site: Hero, Recognition, What We Do, Positioning, Founder/About, How It Works, For Families
+Overseas, Travel Companion, Pricing, FAQ, Final CTA, the enquiry form's field labels, and then each
+standalone page (How It Works, What We Can Help With, About, Contact, the legal pages, and so on).
 
-| File | Controls |
-|---|---|
-| `content/site.ts` | Business name, tagline, service area, contact email, nav links, the boundary statement |
-| `content/services.ts` | The six "what we can help with" cards |
-| `content/faq.ts` | FAQ questions/answers (also feeds FAQPage schema) |
-| `content/founder.ts` | **Founder bio — currently a placeholder, see below** |
-| `content/countries.ts` | The three "for families overseas" country pages (Australia / UK / elsewhere) |
-| `content/guides.ts` | All 10 `/guides` articles |
+Two things are deliberately kept in their own files instead of `siteContent.ts`:
 
-Section components under `components/sections/` control layout/structure; page-level copy that
-isn't reused (hero headline, page intros) lives directly in `app/**/page.tsx` and
-`components/sections/Hero.tsx`.
+| File | Controls | Why it's separate |
+|---|---|---|
+| `content/guides.ts` | The 10 long-form `/guides` articles | Each is several paragraphs — folding all 10 into `siteContent.ts` would make one already-long file much harder to scroll through and find things in. Same rule applies: only edit the text between quote marks. |
+| `content/media.ts` | Which photo files are used, and their alt text | It's image configuration, not wording — see "Where to add photos" above. |
+
+You do not need to touch anything under `components/` or `app/` to change wording — those files
+pull their text from `content/siteContent.ts` at build time.
+
+## Editing website wording directly on GitHub (no coding tools required)
+
+Once this repo is pushed to GitHub and connected to Vercel (see Deployment below), you can change
+any wording on the live site from a web browser — no local setup, no Claude Code, no terminal.
+
+1. Go to the repo on **github.com** and open `content/siteContent.ts` (or `content/guides.ts` for
+   a guide article).
+2. Click the **pencil icon** (Edit this file) near the top right of the file view. GitHub opens an
+   in-browser text editor.
+3. Find the section you want using the `// ----` comment banners as signposts (e.g. `// PRICING /
+   FOUNDING FAMILY PILOT`), then change the text **between the quote marks**. Leave the quote
+   marks, commas, and `{ }` / `[ ]` brackets exactly where they are.
+4. Scroll to the bottom of the page. Under "Commit changes":
+   - Add a short message describing what you changed (e.g. "Update pilot pricing to $249").
+   - Choose **"Commit directly to the `main` branch"**.
+   - Click **Commit changes**.
+5. That's it. Vercel is watching the `main` branch — within a minute or two of the commit, it
+   automatically rebuilds and redeploys the live site with your change. You can watch the build
+   progress on your Vercel dashboard if you want to confirm it went through.
+
+**If something looks broken after a commit:** the most common cause is an accidentally deleted or
+duplicated quote mark, comma or bracket while editing. On GitHub, open the file again, click the
+"History" (clock icon) to see previous versions, and you can view exactly what changed in your
+commit to spot the stray character. Because every commit is saved, nothing is ever truly lost —
+you can always click into an earlier version and copy the working text back.
+
+**Tip:** GitHub's editor has a "Preview" tab for Markdown files but not for `.ts` files like this
+one — it just shows you plain text, which is expected. As long as your change only touches text
+between quote marks, you don't need to worry about how the rest of the file is structured.
 
 ## How form submissions work
 
@@ -123,8 +156,8 @@ in the "Top Sources" panel). The "Locations" panel breaks down visits by country
 
 ## Content still placeholder before launch
 
-- **Founder photo** — `content/founder.ts` now has Stephanie's real bio. The photo is still
-  outstanding; see `content/media.ts` (`founderPhoto`).
+- **Founder photo** — `content/siteContent.ts` (`founderContent`) now has Stephanie's real bio.
+  The photo is still outstanding; see `content/media.ts` (`founderPhoto`).
 - **Photography** — hero and founder images are currently styled placeholder blocks. To add real
   photos, see `content/media.ts`: drop the file into `public/images/` using the filename listed
   (`hero-home.jpg` at 1600×2000px, `founder-photo.jpg` at 800×1000px — both 4:5 portrait, under
@@ -134,12 +167,12 @@ in the "Top Sources" panel). The "Locations" panel breaks down visits by country
 - **Legal pages** (`/privacy`, `/terms`, `/supplier-relationships`, `/service-boundaries`) are
   structural placeholders flagged in-page — **all four need review by a qualified NZ lawyer**
   before onboarding paying customers. They are set to `noindex` until finalised.
-- **Contact email** (`hello@yourperson.nz` in `content/site.ts`) needs to be a real, monitored
-  inbox before launch.
-- **OG image** (`content/site.ts` → `ogImage`) is a placeholder path; add a real 1200×630 image at
-  `public/images/og-default.jpg`.
-- **Domain** — `content/site.ts` → `url` is set to `https://yourperson.nz`; confirm this matches
-  the live domain once DNS is configured.
+- **Contact email** (`hello@yourperson.nz` in `content/siteContent.ts` → `site.email`) needs to be
+  a real, monitored inbox before launch.
+- **OG image** (`content/siteContent.ts` → `site.ogImage`) is a placeholder path; add a real
+  1200×630 image at `public/images/og-default.jpg`.
+- **Domain** — `content/siteContent.ts` → `site.url` is set to `https://yourperson.nz`; confirm
+  this matches the live domain once DNS is configured.
 
 ## Legal/business items to resolve before taking paying customers
 
@@ -151,6 +184,7 @@ in the "Top Sources" panel). The "Locations" panel breaks down visits by country
 - Business registration / structure, and how payments will eventually be collected (out of scope
   for this MVP, which does not collect payment).
 - Public liability insurance and any relevant NZ business insurance.
-- A real, monitored contact channel (email/phone) replacing the placeholder in `content/site.ts`.
+- A real, monitored contact channel (email/phone) replacing the placeholder in
+  `content/siteContent.ts` → `site.email`.
 - Data handling: confirm where Airtable/Resend data is stored and for how long, and reflect that
   accurately in the Privacy Policy (NZ Privacy Act 2020 compliance).

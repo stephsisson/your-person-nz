@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { positioningContent } from "@/content/siteContent";
 
 export function Positioning() {
   return (
@@ -8,15 +9,14 @@ export function Positioning() {
       <Container>
         <Reveal>
           <SectionHeading
-            eyebrow="What this isn't"
-            title="Not home care. Not taking over. Just really useful help."
-            description="Mum or Dad may be entirely independent — still driving, travelling, gardening, working, socialising, with zero interest in being 'looked after.' Sometimes they just need another capable person nearby, and sometimes the family overseas needs to know someone in New Zealand can help when they can't."
+            eyebrow={positioningContent.eyebrow}
+            title={positioningContent.heading}
+            description={positioningContent.description}
           />
         </Reveal>
         <Reveal>
           <p className="mt-6 max-w-2xl text-lg font-display text-ink">
-            Your Person NZ works with the family, not around them. The aim is to make life easier
-            while protecting independence, choice and dignity.
+            {positioningContent.closingLine}
           </p>
         </Reveal>
       </Container>

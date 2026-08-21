@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PlausibleScript } from "@/components/analytics/PlausibleScript";
 import { organizationSchema } from "@/lib/schema";
-import { site } from "@/content/site";
+import { site } from "@/content/siteContent";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",

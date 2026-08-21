@@ -3,8 +3,7 @@ import { notFound } from "next/navigation";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { countryPages } from "@/content/countries";
-import { site } from "@/content/site";
+import { countryPages, countryPageContent, site } from "@/content/siteContent";
 import { pageMetadata } from "@/lib/pageMetadata";
 
 export function generateStaticParams() {
@@ -43,15 +42,15 @@ export default async function CountryPage({
       <section className="py-16 sm:py-24">
         <Container className="max-w-2xl space-y-8">
           <div>
-            <h2 className="font-display text-2xl text-ink">The distance problem</h2>
+            <h2 className="font-display text-2xl text-ink">{countryPageContent.distanceHeading}</h2>
             <p className="mt-3 text-ink-soft">{country.timeZoneNote}</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-ink">What {site.name} does</h2>
+            <h2 className="font-display text-2xl text-ink">{countryPageContent.whatWeDoHeading}</h2>
             <p className="mt-3 text-ink-soft">{site.entityDescription}</p>
           </div>
           <div className="pt-4">
-            <Button href="/contact">Tell us about your family</Button>
+            <Button href="/contact">{countryPageContent.ctaLabel}</Button>
           </div>
         </Container>
       </section>

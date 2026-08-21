@@ -2,15 +2,13 @@ import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { services } from "@/content/services";
+import { services, boundaryStatement, whatWeCanHelpWithPageContent } from "@/content/siteContent";
 import { serviceSchema } from "@/lib/schema";
-import { boundaryStatement, site } from "@/content/site";
 import { pageMetadata } from "@/lib/pageMetadata";
 
 export const metadata = pageMetadata({
-  title: "What We Can Help With",
-  description:
-    "From organising trusted trades and checking the house, to being there when you can't — what Your Person NZ can help with for families in Christchurch and Canterbury.",
+  title: whatWeCanHelpWithPageContent.metaTitle,
+  description: whatWeCanHelpWithPageContent.metaDescription,
   path: "/what-we-can-help-with",
 });
 
@@ -24,15 +22,9 @@ export default function WhatWeCanHelpWithPage() {
         }}
       />
       <PageIntro
-        eyebrow="What we can help with"
-        title="One trusted local person. Lots of things we can sort."
-        description={
-          <p>
-            {site.name} coordinates practical, everyday support for families with a parent in{" "}
-            {site.serviceAreaFull} — not medical or personal care, but the local logistics that are
-            genuinely hard to manage from overseas.
-          </p>
-        }
+        eyebrow={whatWeCanHelpWithPageContent.eyebrow}
+        title={whatWeCanHelpWithPageContent.title}
+        description={<p>{whatWeCanHelpWithPageContent.description}</p>}
       />
 
       <section className="py-16 sm:py-24">
@@ -51,7 +43,7 @@ export default function WhatWeCanHelpWithPage() {
           </p>
 
           <div className="mt-8">
-            <Button href="/contact">Tell us what you need help with</Button>
+            <Button href="/contact">{whatWeCanHelpWithPageContent.ctaLabel}</Button>
           </div>
         </Container>
       </section>

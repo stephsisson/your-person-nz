@@ -1,12 +1,12 @@
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
+import { contactPageContent } from "@/content/siteContent";
 import { pageMetadata } from "@/lib/pageMetadata";
 
 export const metadata = pageMetadata({
-  title: "Get in Touch",
-  description:
-    "Tell us about your family and we'll be in touch personally as the Christchurch pilot takes shape. No payment, no commitment.",
+  title: contactPageContent.metaTitle,
+  description: contactPageContent.metaDescription,
   path: "/contact",
 });
 
@@ -38,14 +38,9 @@ export default async function ContactPage({
   return (
     <>
       <PageIntro
-        eyebrow="Get in touch"
-        title="Tell us about your family"
-        description={
-          <p>
-            No payment, no commitment — this helps us understand what overseas families actually
-            need as we build the Christchurch pilot.
-          </p>
-        }
+        eyebrow={contactPageContent.eyebrow}
+        title={contactPageContent.title}
+        description={<p>{contactPageContent.description}</p>}
       />
 
       <section className="py-16 sm:py-24" id="form">

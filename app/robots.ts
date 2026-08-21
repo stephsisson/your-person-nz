@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/content/site";
+import { site } from "@/content/siteContent";
 
 // Per the AI-SEO requirements, we deliberately allow the major AI/answer-engine
 // crawlers (in addition to standard search engines) so Your Person NZ can be

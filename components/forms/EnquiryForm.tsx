@@ -3,15 +3,9 @@
 import { FormEvent, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { trackEvent } from "@/lib/analytics";
+import { enquiryFormContent } from "@/content/siteContent";
 
-const serviceOptions = [
-  { value: "ongoing-local-support", label: "Ongoing local support" },
-  { value: "one-off-help", label: "One-off help" },
-  { value: "house-checks", label: "House checks" },
-  { value: "coordinating-trades", label: "Coordinating trades / services" },
-  { value: "travel-companion", label: "Travel companion" },
-  { value: "not-sure-yet", label: "Not sure yet" },
-] as const;
+const { fieldLabels, serviceOptions, payingOptions } = enquiryFormContent;
 
 export function EnquiryForm({
   source,
@@ -75,17 +69,15 @@ export function EnquiryForm({
       trackEvent("pilot_application", { source });
     } catch {
       setStatus("error");
-      setErrorMessage("Something went wrong sending that through. Please try again, or email us directly.");
+      setErrorMessage(enquiryFormContent.errorMessage);
     }
   }
 
   if (status === "success") {
     return (
       <div className="rounded-2xl border border-teal/30 bg-teal-light p-8 text-center">
-        <p className="font-display text-2xl text-ink">You&apos;re on the list.</p>
-        <p className="mt-3 text-ink-soft">
-          Thanks — we&apos;ll be in touch personally as the Christchurch pilot takes shape.
-        </p>
+        <p className="font-display text-2xl text-ink">{enquiryFormContent.successHeading}</p>
+        <p className="mt-3 text-ink-soft">{enquiryFormContent.successBody}</p>
       </div>
     );
   }
@@ -99,34 +91,40 @@ export function EnquiryForm({
       </div>
 
       <div className={`grid gap-5 ${compact ? "" : "sm:grid-cols-2"}`}>
-        <Field label="Your name" name="name" required autoComplete="name" />
-        <Field label="Email" name="email" type="email" required autoComplete="email" />
+        <Field label={fieldLabels.name} name="name" required autoComplete="name" />
+        <Field label={fieldLabels.email} name="email" type="email" required autoComplete="email" />
       </div>
 
       <div className={`grid gap-5 ${compact ? "" : "sm:grid-cols-2"}`}>
-        <Field label="Phone / WhatsApp number" name="phone" required autoComplete="tel" />
-        <Field label="Where do you live?" name="liveLocation" required placeholder="e.g. Melbourne, Australia" />
+        <Field label={fieldLabels.phone} name="phone" required autoComplete="tel" />
+        <Field
+          label={fieldLabels.liveLocation}
+          name="liveLocation"
+          required
+          placeholder={fieldLabels.liveLocationPlaceholder}
+        />
       </div>
 
       <Field
-        label="Parent / family member's suburb or town in Canterbury"
+        label={fieldLabels.parentSuburb}
         name="parentSuburb"
         required
-        placeholder="e.g. Fendalton, Christchurch"
+        placeholder={fieldLabels.parentSuburbPlaceholder}
       />
 
-      <Field label="Who are you looking for help for?" name="helpingWho" required placeholder="e.g. My mum" />
-
-      <TextArea label="What would you most like help with?" name="mostWantHelpWith" required />
-
-      <TextArea
-        label="What are you currently organising from overseas?"
-        name="currentlyOrganising"
-        required={false}
+      <Field
+        label={fieldLabels.helpingWho}
+        name="helpingWho"
+        required
+        placeholder={fieldLabels.helpingWhoPlaceholder}
       />
+
+      <TextArea label={fieldLabels.mostWantHelpWith} name="mostWantHelpWith" required />
+
+      <TextArea label={fieldLabels.currentlyOrganising} name="currentlyOrganising" required={false} />
 
       <div>
-        <label className="block text-sm font-medium text-ink mb-2">Which service interests you?</label>
+        <label className="block text-sm font-medium text-ink mb-2">{fieldLabels.serviceInterest}</label>
         <select
           name="serviceInterest"
           required
@@ -134,7 +132,7 @@ export function EnquiryForm({
           className="w-full rounded-lg border border-ink/20 bg-white px-4 py-3 text-ink focus-visible:outline-teal"
         >
           <option value="" disabled>
-            Select an option
+            {fieldLabels.serviceInterestPlaceholder}
           </option>
           {serviceOptions.map((option) => (
             <option key={option.value} value={option.value}>
@@ -145,11 +143,9 @@ export function EnquiryForm({
       </div>
 
       <fieldset>
-        <legend className="block text-sm font-medium text-ink mb-2">
-          If an ongoing service cost approximately NZ$199–299/month, would you consider paying for it?
-        </legend>
+        <legend className="block text-sm font-medium text-ink mb-2">{fieldLabels.wouldConsiderPaying}</legend>
         <div className="flex gap-6">
-          {["yes", "possibly", "no"].map((value) => (
+          {payingOptions.map((value) => (
             <label key={value} className="flex items-center gap-2 text-sm text-ink-soft">
               <input type="radio" name="wouldConsiderPaying" value={value} required />
               <span className="capitalize">{value}</span>
@@ -158,12 +154,12 @@ export function EnquiryForm({
         </div>
       </fieldset>
 
-      <TextArea label="Anything else we should know?" name="anythingElse" required={false} />
+      <TextArea label={fieldLabels.anythingElse} name="anythingElse" required={false} />
 
       {errorMessage ? <p className="text-sm text-red-700">{errorMessage}</p> : null}
 
       <Button type="submit" className="w-full sm:w-auto">
-        {status === "submitting" ? "Sending…" : "Tell me when the pilot opens"}
+        {status === "submitting" ? enquiryFormContent.submittingLabel : enquiryFormContent.submitLabel}
       </Button>
     </form>
   );

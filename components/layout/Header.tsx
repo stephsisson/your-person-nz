@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { primaryNav, navCta, site } from "@/content/site";
+import { primaryNav, navCta, site } from "@/content/siteContent";
 
 export function Header() {
   const [open, setOpen] = useState(false);

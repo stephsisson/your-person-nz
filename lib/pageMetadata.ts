@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@/content/site";
+import { site } from "@/content/siteContent";
 
 // Next.js does NOT regenerate openGraph/twitter from a page's own title/description
 // unless you set them explicitly — child pages otherwise inherit the root layout's

@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/content/site";
+import { site, countryPages } from "@/content/siteContent";
 import { guides } from "@/content/guides";
-import { countryPages } from "@/content/countries";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [

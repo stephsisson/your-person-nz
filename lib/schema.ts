@@ -1,7 +1,5 @@
-import { site } from "@/content/site";
-import { faqItems } from "@/content/faq";
+import { site, faqItems, type Service } from "@/content/siteContent";
 import type { Guide } from "@/content/guides";
-import type { Service } from "@/content/services";
 
 // Small JSON-LD builders, kept framework-free so they can be dropped into any
 // page via a <script type="application/ld+json"> tag.

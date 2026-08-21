@@ -2,12 +2,12 @@ import Link from "next/link";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
 import { guides } from "@/content/guides";
+import { guidesIndexPageContent } from "@/content/siteContent";
 import { pageMetadata } from "@/lib/pageMetadata";
 
 export const metadata = pageMetadata({
-  title: "Guides",
-  description:
-    "Practical guides for New Zealanders living overseas with ageing parents or family in Christchurch and Canterbury — long-distance caregiving, home maintenance, trusted trades and travel.",
+  title: guidesIndexPageContent.metaTitle,
+  description: guidesIndexPageContent.metaDescription,
   path: "/guides",
 });
 
@@ -15,14 +15,9 @@ export default function GuidesIndexPage() {
   return (
     <>
       <PageIntro
-        eyebrow="Guides"
-        title="Practical guides for families managing things from overseas."
-        description={
-          <p>
-            Straightforward advice on ageing parents, long-distance caregiving and managing a home
-            in New Zealand from another country.
-          </p>
-        }
+        eyebrow={guidesIndexPageContent.eyebrow}
+        title={guidesIndexPageContent.title}
+        description={<p>{guidesIndexPageContent.description}</p>}
       />
 
       <section className="py-16 sm:py-24">

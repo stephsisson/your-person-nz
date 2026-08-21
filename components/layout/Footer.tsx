@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { site, footerNav } from "@/content/site";
+import { site, footerNav } from "@/content/siteContent";
 
 export function Footer() {
   return (

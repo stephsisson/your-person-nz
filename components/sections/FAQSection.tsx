@@ -1,13 +1,13 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { faqItems } from "@/content/faq";
+import { faqItems, faqContent } from "@/content/siteContent";
 
 export function FAQSection() {
   return (
     <section id="faq" className="py-16 sm:py-24 bg-paper-dim border-b border-ink/10">
       <Container>
-        <SectionHeading eyebrow="Questions" title="Frequently asked questions" />
+        <SectionHeading eyebrow={faqContent.eyebrow} title={faqContent.heading} />
 
         <div className="mt-10 max-w-3xl divide-y divide-ink/10">
           {faqItems.map((item) => (

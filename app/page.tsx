@@ -13,7 +13,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { faqPageSchema } from "@/lib/schema";
-import { site } from "@/content/site";
+import { site, homepageFormSectionContent } from "@/content/siteContent";
 import { pageMetadata } from "@/lib/pageMetadata";
 
 export const metadata = pageMetadata({
@@ -43,9 +43,9 @@ export default function HomePage() {
       <section id="form" className="py-16 sm:py-24 border-b border-ink/10">
         <Container className="max-w-2xl">
           <SectionHeading
-            eyebrow="Get in touch"
-            title="Tell us about your family"
-            description="No payment, no commitment — this helps us understand what overseas families actually need as we build the Christchurch pilot."
+            eyebrow={homepageFormSectionContent.eyebrow}
+            title={homepageFormSectionContent.heading}
+            description={homepageFormSectionContent.description}
           />
           <div className="mt-10">
             <EnquiryForm source="homepage-founding-pilot" />

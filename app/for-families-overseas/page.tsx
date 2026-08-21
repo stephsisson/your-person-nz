@@ -1,14 +1,12 @@
 import Link from "next/link";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { Container } from "@/components/ui/Container";
-import { countryPages } from "@/content/countries";
-import { site } from "@/content/site";
+import { countryPages, forFamiliesOverseasPageContent } from "@/content/siteContent";
 import { pageMetadata } from "@/lib/pageMetadata";
 
 export const metadata = pageMetadata({
-  title: "For Families Overseas",
-  description:
-    "Your Person NZ is built for Kiwi families managing things across borders and time zones, with a parent in Christchurch or Canterbury and family living in Australia, the UK, or elsewhere overseas.",
+  title: forFamiliesOverseasPageContent.metaTitle,
+  description: forFamiliesOverseasPageContent.metaDescription,
   path: "/for-families-overseas",
 });
 
@@ -16,15 +14,9 @@ export default function ForFamiliesOverseasPage() {
   return (
     <>
       <PageIntro
-        eyebrow="For families overseas"
-        title="Built for families with a few thousand kilometres between them."
-        description={
-          <p>
-            Wherever you&apos;ve ended up, if your parent or family member is still living
-            independently in {site.serviceAreaFull}, {site.name} can be your local point of contact
-            for the practical things.
-          </p>
-        }
+        eyebrow={forFamiliesOverseasPageContent.eyebrow}
+        title={forFamiliesOverseasPageContent.title}
+        description={<p>{forFamiliesOverseasPageContent.description}</p>}
       />
 
       <section className="py-16 sm:py-24">

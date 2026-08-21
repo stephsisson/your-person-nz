@@ -2,17 +2,13 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { services } from "@/content/services";
-import { boundaryStatement } from "@/content/site";
+import { services, whatWeDoContent, boundaryStatement } from "@/content/siteContent";
 
 export function WhatWeDo() {
   return (
     <section id="what-we-do" className="py-16 sm:py-24 border-b border-ink/10">
       <Container>
-        <SectionHeading
-          eyebrow="What we actually do"
-          title="One trusted local person. Lots of things we can sort."
-        />
+        <SectionHeading eyebrow={whatWeDoContent.eyebrow} title={whatWeDoContent.heading} />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (

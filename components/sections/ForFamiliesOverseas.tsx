@@ -1,16 +1,16 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { countryPages } from "@/content/countries";
+import { countryPages, forFamiliesOverseasContent } from "@/content/siteContent";
 
 export function ForFamiliesOverseas() {
   return (
     <section id="for-families-overseas" className="py-16 sm:py-24 border-b border-ink/10">
       <Container>
         <SectionHeading
-          eyebrow="For families overseas"
-          title="Built for families with a few thousand kilometres between them."
-          description="Your Person NZ is designed for families managing things across borders, time zones and very long flights — wherever in the world you've ended up."
+          eyebrow={forFamiliesOverseasContent.eyebrow}
+          title={forFamiliesOverseasContent.heading}
+          description={forFamiliesOverseasContent.description}
         />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
