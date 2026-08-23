@@ -81,7 +81,7 @@ export async function submitEnquiry(input: EnquiryInput) {
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
-  const notifyEmail = process.env.NOTIFY_EMAIL;
+  const notifyEmail = process.env.NOTIFY_EMAIL || "steph@yourperson.nz";
 
   if (resendApiKey && notifyEmail) {
     const { Resend } = await import("resend");
