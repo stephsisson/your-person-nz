@@ -17,8 +17,8 @@ export const media = {
   founderPhoto: {
     // Recommended: 800x1000px (4:5 portrait), .jpg or .webp, under ~300KB.
     // A genuine, professional headshot/portrait of the founder.
-    src: "/images/founder-photo.jpg",
-    alt: "Stephanie Sisson, founder of Your Person NZ",
-    ready: false,
+    src: "/images/founder.jpg",
+    alt: "Stephanie Sisson, founder of Your Person NZ, smiling in a red jacket and cap on a hillside above Lyttelton Harbour",
+    ready: true,
   },
 } as const;

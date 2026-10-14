@@ -17,14 +17,14 @@ export function FounderBio({ condensed = false }: { condensed?: boolean }) {
         <Reveal>
           <div className="mt-10 grid gap-10 lg:grid-cols-[280px_1fr] lg:items-start">
             {/* See content/media.ts to swap this placeholder for a real photo:
-                drop the file at public/images/founder-photo.jpg and flip `ready` to true. */}
+                drop the file at public/images/founder.jpg and flip `ready` to true. */}
             {media.founderPhoto.ready ? (
               <Image
                 src={media.founderPhoto.src}
                 alt={media.founderPhoto.alt}
                 width={800}
                 height={1000}
-                className="aspect-[4/5] w-full max-w-[280px] rounded-2xl object-cover border border-ink/10"
+                className="aspect-[4/5] w-full max-w-[280px] rounded-2xl object-cover object-top border border-ink/10"
               />
             ) : (
               <div
