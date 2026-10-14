@@ -6,11 +6,10 @@
 
 export const media = {
   heroImage: {
-    // Square source (1000x1000) shown in a wide frame. `position` keeps the
-    // bridge (about 45% down the image) in view when the top and bottom crop.
-    src: "/images/heroimage.png",
-    alt: "A stone bridge arching over the Avon River in Christchurch, framed by bare autumn trees and their reflections in the water",
-    position: "50% 45%",
+    // Panoramic source (1916x821, about 7:3). The hero frame uses the same
+    // ratio so the image is shown whole, with no cropping.
+    src: "/images/hero2.png",
+    alt: "The Bridge of Remembrance in Christchurch lit by golden evening sun, with the Avon River, spring gardens and the Cathedral spire beyond",
     ready: true,
   },
   founderPhoto: {

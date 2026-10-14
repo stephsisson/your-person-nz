@@ -30,23 +30,22 @@ export function Hero() {
         </div>
 
         {/* See content/media.ts to swap this placeholder for a real photo:
-            drop the file at public/images/heroimage.png and flip `ready` to true. */}
+            drop the file at public/images/hero2.png and flip `ready` to true. */}
         {media.heroImage.ready ? (
           <Image
             src={media.heroImage.src}
             alt={media.heroImage.alt}
-            width={1000}
-            height={1000}
+            width={1916}
+            height={821}
             priority
             sizes="(min-width: 1024px) 560px, 100vw"
-            style={{ objectPosition: media.heroImage.position }}
-            className="aspect-[3/2] w-full rounded-3xl object-cover border border-ink/10"
+            className="aspect-[1916/821] w-full rounded-3xl object-cover border border-ink/10"
           />
         ) : (
           <div
             role="img"
             aria-label={heroContent.imageAlt}
-            className="aspect-[3/2] w-full rounded-3xl bg-gradient-to-br from-sand-light via-paper-dim to-teal-light border border-ink/10 flex items-center justify-center"
+            className="aspect-[1916/821] w-full rounded-3xl bg-gradient-to-br from-sand-light via-paper-dim to-teal-light border border-ink/10 flex items-center justify-center"
           >
             <span className="text-sm text-ink-soft/70 px-8 text-center">
               Photography placeholder — see content/media.ts
