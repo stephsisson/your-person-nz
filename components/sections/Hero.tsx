@@ -14,8 +14,12 @@ export function Hero() {
             <br />
             <span className="text-teal">{heroContent.headlineLine2}</span>
           </h1>
-          <p className="mt-6 text-lg text-ink-soft max-w-xl">{heroContent.subhead}</p>
-          <p className="mt-4 text-sm font-medium text-teal-dark">{heroContent.launchNote}</p>
+          <p className="mt-6 text-lg text-ink-soft max-w-xl">
+            {heroContent.subhead}
+          </p>
+          <p className="mt-4 text-sm font-medium text-teal-dark">
+            {heroContent.launchNote}
+          </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Button href="/contact">{heroContent.primaryCtaLabel}</Button>
@@ -26,21 +30,23 @@ export function Hero() {
         </div>
 
         {/* See content/media.ts to swap this placeholder for a real photo:
-            drop the file at public/images/hero-home.jpg and flip `ready` to true. */}
+            drop the file at public/images/heroimage.png and flip `ready` to true. */}
         {media.heroImage.ready ? (
           <Image
             src={media.heroImage.src}
             alt={media.heroImage.alt}
-            width={1600}
-            height={2000}
+            width={1000}
+            height={1000}
             priority
-            className="aspect-[4/5] w-full rounded-3xl object-cover border border-ink/10"
+            sizes="(min-width: 1024px) 560px, 100vw"
+            style={{ objectPosition: media.heroImage.position }}
+            className="aspect-[3/2] w-full rounded-3xl object-cover border border-ink/10"
           />
         ) : (
           <div
             role="img"
             aria-label={heroContent.imageAlt}
-            className="aspect-[4/5] w-full rounded-3xl bg-gradient-to-br from-sand-light via-paper-dim to-teal-light border border-ink/10 flex items-center justify-center"
+            className="aspect-[3/2] w-full rounded-3xl bg-gradient-to-br from-sand-light via-paper-dim to-teal-light border border-ink/10 flex items-center justify-center"
           >
             <span className="text-sm text-ink-soft/70 px-8 text-center">
               Photography placeholder — see content/media.ts
