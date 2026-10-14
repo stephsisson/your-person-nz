@@ -58,7 +58,8 @@ export function EnquiryForm({
       });
 
       if (!res.ok) {
-        throw new Error("Submission failed");
+        const body = await res.json().catch(() => null);
+        throw new Error(`Submission failed (${res.status}): ${JSON.stringify(body)}`);
       }
 
       setStatus("success");
@@ -67,7 +68,8 @@ export function EnquiryForm({
         trackEvent("travel_companion_click", { source });
       }
       trackEvent("pilot_application", { source });
-    } catch {
+    } catch (error) {
+      console.error("Enquiry submission failed", error);
       setStatus("error");
       setErrorMessage(enquiryFormContent.errorMessage);
     }
