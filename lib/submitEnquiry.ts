@@ -1,8 +1,9 @@
 import { z } from "zod";
 
-// Single choke point for enquiry submissions. Swapping the storage/notification
-// backend later (a CRM, a database, a different form service) means editing
-// this file only — nothing in the UI or API route needs to change.
+// Single choke point for enquiry submissions. Enquiries are delivered by email
+// via Resend. Swapping the backend later (a CRM, a database, a different form
+// service) means editing this file only — nothing in the UI or API route needs
+// to change.
 
 export const enquirySchema = z.object({
   name: z.string().min(1, "Please tell us your name"),
@@ -39,105 +40,61 @@ export const enquirySchema = z.object({
 export type EnquiryInput = z.infer<typeof enquirySchema>;
 
 export async function submitEnquiry(input: EnquiryInput) {
-  const airtableApiKey = process.env.AIRTABLE_API_KEY;
-  const airtableBaseId = process.env.AIRTABLE_BASE_ID;
-  const airtableTableName = process.env.AIRTABLE_TABLE_NAME || "Enquiries";
-
-  if (airtableApiKey && airtableBaseId) {
-    let res: Response;
-    try {
-      res = await fetch(
-        `https://api.airtable.com/v0/${airtableBaseId}/${encodeURIComponent(airtableTableName)}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${airtableApiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fields: {
-              Name: input.name,
-              Email: input.email,
-              Phone: input.phone,
-              "Lives in": input.liveLocation,
-              "Parent's suburb / town": input.parentSuburb,
-              "Helping who": input.helpingWho,
-              "Most want help with": input.mostWantHelpWith,
-              "Currently organising": input.currentlyOrganising,
-              "Service interest": input.serviceInterest,
-              "Would consider paying $199-299/mo": input.wouldConsiderPaying,
-              "Anything else": input.anythingElse,
-              Source: input.source,
-              "Submitted at": new Date().toISOString(),
-            },
-          }),
-        },
-      );
-    } catch (error) {
-      console.error("Airtable request failed (network error)", error);
-      throw error;
-    }
-
-    if (!res.ok) {
-      const body = await res.text();
-      console.error(`Airtable submission failed: ${res.status} ${body}`);
-      throw new Error(`Airtable submission failed: ${res.status} ${body}`);
-    }
-  } else if (process.env.NODE_ENV === "production") {
-    // In production a missing config must NOT look like success — the
-    // enquiry would be lost. Fail loudly so the form shows an error.
-    console.error(
-      "AIRTABLE_API_KEY / AIRTABLE_BASE_ID not set in production — enquiry was NOT saved.",
-    );
-    throw new Error("Airtable is not configured");
-  } else {
-    // Local dev without env vars — log instead of failing silently.
-    console.warn(
-      "AIRTABLE_API_KEY / AIRTABLE_BASE_ID not set — enquiry logged to console only.",
-      input,
-    );
-  }
-
   const resendApiKey = process.env.RESEND_API_KEY;
   const notifyEmail = process.env.NOTIFY_EMAIL || "steph@yourperson.nz";
 
-  if (resendApiKey && notifyEmail) {
-    const { Resend } = await import("resend");
-    const resend = new Resend(resendApiKey);
-    try {
-      // The Resend SDK does not throw on API errors — it returns { data, error }.
-      const { error } = await resend.emails.send({
-        from:
-          process.env.RESEND_FROM_EMAIL ||
-          "Your Person NZ <notifications@yourperson.nz>",
-        to: notifyEmail,
-        subject: `New enquiry (${input.source}): ${input.name}`,
-        text: [
-          `Name: ${input.name}`,
-          `Email: ${input.email}`,
-          `Phone: ${input.phone}`,
-          `Lives in: ${input.liveLocation}`,
-          `Parent's suburb/town: ${input.parentSuburb}`,
-          `Helping who: ${input.helpingWho}`,
-          `Most wants help with: ${input.mostWantHelpWith}`,
-          `Currently organising: ${input.currentlyOrganising}`,
-          `Service interest: ${input.serviceInterest}`,
-          `Would consider paying: ${input.wouldConsiderPaying}`,
-          `Anything else: ${input.anythingElse}`,
-          `Source: ${input.source}`,
-        ].join("\n"),
-      });
-      if (error) {
-        console.error("Resend email failed", error);
-      }
-    } catch (error) {
-      // The enquiry is already saved to Airtable, so don't fail the
-      // submission (and invite a duplicate resubmit) over a notification.
-      console.error("Resend email threw", error);
+  if (!resendApiKey) {
+    // Local dev without env vars — log instead of failing silently.
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        "RESEND_API_KEY not set — enquiry logged to console only.",
+        input,
+      );
+      return;
     }
-  } else {
-    console.warn(
-      "RESEND_API_KEY / NOTIFY_EMAIL not set — skipping email notification.",
+    // In production a missing key must NOT look like success — the enquiry
+    // would be lost. Fail so the form shows an error.
+    console.error(
+      "RESEND_API_KEY not set in production — enquiry was NOT sent.",
     );
+    throw new Error("Resend is not configured");
+  }
+
+  const { Resend } = await import("resend");
+  const resend = new Resend(resendApiKey);
+
+  // The Resend SDK does not throw on API errors — it returns { data, error }.
+  let error;
+  try {
+    ({ error } = await resend.emails.send({
+      from:
+        process.env.RESEND_FROM_EMAIL ||
+        "Your Person NZ <notifications@yourperson.nz>",
+      to: notifyEmail,
+      replyTo: input.email,
+      subject: `New enquiry (${input.source}): ${input.name}`,
+      text: [
+        `Name: ${input.name}`,
+        `Email: ${input.email}`,
+        `Phone: ${input.phone}`,
+        `Lives in: ${input.liveLocation}`,
+        `Parent's suburb/town: ${input.parentSuburb}`,
+        `Helping who: ${input.helpingWho}`,
+        `Most wants help with: ${input.mostWantHelpWith}`,
+        `Currently organising: ${input.currentlyOrganising}`,
+        `Service interest: ${input.serviceInterest}`,
+        `Would consider paying: ${input.wouldConsiderPaying}`,
+        `Anything else: ${input.anythingElse}`,
+        `Source: ${input.source}`,
+      ].join("\n"),
+    }));
+  } catch (err) {
+    console.error("Resend email threw", err);
+    throw err;
+  }
+
+  if (error) {
+    console.error("Resend email failed", error);
+    throw new Error(`Resend email failed: ${error.message}`);
   }
 }

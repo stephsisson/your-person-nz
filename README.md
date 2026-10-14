@@ -78,31 +78,22 @@ between quote marks, you don't need to worry about how the rest of the file is s
 
 The `EnquiryForm` component (`components/forms/EnquiryForm.tsx`) posts to `POST /api/enquiry`
 (`app/api/enquiry/route.ts`), which validates the payload with Zod and calls a single function,
-`submitEnquiry()` in `lib/submitEnquiry.ts`. That function:
+`submitEnquiry()` in `lib/submitEnquiry.ts`. That function sends an email notification via
+**Resend** (needs `RESEND_API_KEY`; goes to `NOTIFY_EMAIL`, with the enquirer's address as
+reply-to). The subject includes the `Source`, which records which CTA triggered the enquiry (e.g.
+`homepage-founding-pilot`, `travel-companion-page`, `guide:<slug>`).
 
-1. Writes the submission as a row to an **Airtable** base (if `AIRTABLE_API_KEY` and
-   `AIRTABLE_BASE_ID` are set) — gives you a spreadsheet-style view you can filter/sort by
-   `Source`, which records which CTA triggered the enquiry (e.g. `homepage-founding-pilot`,
-   `travel-companion-page`, `guide:<slug>`).
-2. Sends an email notification via **Resend** (if `RESEND_API_KEY` and `NOTIFY_EMAIL` are set).
+If the email fails (or `RESEND_API_KEY` is missing in production) the API returns a 500 and the form
+shows an error. In local dev without the key, submissions are logged to the server console only.
+**Set the real values in Vercel before launch** (see Environment variables below). Because
+everything routes through `submitEnquiry()`, swapping to a different backend later (a CRM, a
+database) means editing one file.
 
-Without those env vars set, submissions are logged to the server console only — useful for local
-dev, not for production. **Set the real values in Vercel before launch** (see Environment
-variables below). Because everything routes through `submitEnquiry()`, swapping to a different
-backend later (a CRM, a database) means editing one file.
+### Setting up Resend
 
-### Setting up Airtable + Resend
-
-1. Create a free [Airtable](https://airtable.com) base with one table (default name `Enquiries`)
-   with columns: Name, Email, Phone, Lives in, Parent's suburb / town, Helping who, Most want help
-   with, Currently organising, Service interest, Would consider paying $199-299/mo, Anything else,
-   Source, Submitted at.
-2. Generate a personal access token at [airtable.com/create/tokens](https://airtable.com/create/tokens)
-   with `data.records:write` scope on that base — this is `AIRTABLE_API_KEY`. The base ID (starts
-   `app...`) is in the base's API docs or URL — this is `AIRTABLE_BASE_ID`.
-3. Create a free [Resend](https://resend.com) account, verify a sending domain (or use their
-   testing domain while validating), and generate an API key — `RESEND_API_KEY`. Set
-   `NOTIFY_EMAIL` to the inbox that should receive new-enquiry alerts.
+Create a free [Resend](https://resend.com) account, verify a sending domain (or use their testing
+domain while validating), and generate an API key — `RESEND_API_KEY`. Set `NOTIFY_EMAIL` to the
+inbox that should receive new-enquiry alerts.
 
 ## How analytics work
 
@@ -141,11 +132,9 @@ in the "Top Sources" panel). The "Locations" panel breaks down visits by country
 2. **Connect to Vercel.** In the [Vercel dashboard](https://vercel.com/new), import the GitHub
    repo. Framework preset "Next.js" is auto-detected — no build settings need changing.
 3. **Add environment variables** in Vercel → Project → Settings → Environment Variables (see
-   `.env.example` for the full list): `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`,
-   `AIRTABLE_TABLE_NAME`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `NOTIFY_EMAIL`,
+   `.env.example` for the full list): `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `NOTIFY_EMAIL`,
    `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`. Add them for Production (and Preview if you want staging
-   submissions to work too — consider a separate Airtable base for Preview so test submissions
-   don't pollute real data).
+   submissions to work too).
 4. **Custom domain.** In Vercel → Project → Settings → Domains, add `yourperson.nz` (and
    `www.yourperson.nz` if desired, redirecting to the apex or vice versa). Vercel will show the
    DNS records to add at your domain registrar — typically an `A` record to Vercel's IP or a
@@ -186,5 +175,5 @@ in the "Top Sources" panel). The "Locations" panel breaks down visits by country
 - Public liability insurance and any relevant NZ business insurance.
 - A real, monitored contact channel (email/phone) replacing the placeholder in
   `content/siteContent.ts` → `site.email`.
-- Data handling: confirm where Airtable/Resend data is stored and for how long, and reflect that
+- Data handling: confirm where Resend data is stored and for how long, and reflect that
   accurately in the Privacy Policy (NZ Privacy Act 2020 compliance).
