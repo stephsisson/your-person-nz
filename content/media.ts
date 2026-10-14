@@ -29,8 +29,7 @@ export const media = {
     ready: true,
   },
   naturalMum: {
-    // Square source (1000x1000). Very colourful (patterned kimono, bright
-    // reds), so it is desaturated and tinted to blend in (see
+    // Square source (1000x1000). Shown at its natural colours (see
     // TravelCompanionTeaser.tsx).
     src: "/images/naturalmum.png",
     alt: "A grey-haired older woman in a patterned kimono resting on a wooden rail beside a calm harbour, looking out into the distance",

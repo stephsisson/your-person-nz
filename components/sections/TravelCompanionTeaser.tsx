@@ -9,7 +9,7 @@ export function TravelCompanionTeaser() {
   return (
     <section
       id="travel-companion"
-      className="py-16 sm:py-24 bg-ink text-paper border-b border-ink/10"
+      className="py-16 sm:py-24 bg-teal-dark text-paper border-b border-ink/10"
     >
       <Container>
         <Reveal>
@@ -32,7 +32,6 @@ export function TravelCompanionTeaser() {
               </div>
             </div>
             {media.naturalMum.ready ? (
-              // Colourful source photo: desaturate and tint toward the site's teal so it sits quietly on the dark band.
               <div className="relative overflow-hidden rounded-3xl border border-paper/15">
                 <Image
                   src={media.naturalMum.src}
@@ -41,11 +40,7 @@ export function TravelCompanionTeaser() {
                   height={1000}
                   sizes="(min-width: 1024px) 320px, 100vw"
                   style={{ objectPosition: media.naturalMum.position }}
-                  className="aspect-[4/5] w-full object-cover saturate-[0.55] sepia-[0.15] brightness-95"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-teal-dark/30 mix-blend-multiply"
+                  className="aspect-[4/5] w-full object-cover"
                 />
               </div>
             ) : null}
